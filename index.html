@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Astronomy Picture of the Day</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
     <meta title="APOD Viewer">
     <meta name="description" content="Aesthetically pleasing Astronomy Picture viewer">
@@ -15,35 +16,54 @@
         background-color: black;
         color: white;
       }
+      body {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        font-family: "Roboto";
+      }
 
-      img {
+      img, iframe {
         display: block;
-        max-height: 100vh;
+        border: none;
+        object-fit: cover;
       }
       main {
         padding: 10px;
+        min-width: 50vw;
       }
       article, address {
         max-width: 80ch;
-        white-space: pre-line;
       }
       h1 {
-        font-family: "Roboto";
         font-weight: 300;
         text-transform: uppercase;
         letter-spacing: 2px;
       }
-      address, a {
-        font-family: "Roboto";
+
+      @media only screen and (max-width: 800px) {
+        body {
+          flex-direction: column;
+        }
+      }
+      @media only screen and (min-width: 801px) {
+        img, iframe {
+          max-width: 50vw;
+          height: 100vh;
+        }
       }
     </style>
+    <link rel="icon" href="https://apod.nasa.gov/apod/calendar/today.jpg">
   </head>
   <body>
-    <img id="image" src alt>
+    <img id="image" alt>
     <main>
       <h1 id="title"></h1>
       <article id="desc">
       </article>
+      <br><br>
       <address id="credits">
         <time id="timestamp"></time>
         &copy;&nbsp; </address>
@@ -54,18 +74,25 @@
       var today = new Date();
       var today_date = today.toISOString().split("T")[0];
       var api_req = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
+      // DEMO KEY XD
 
-      var apod = JSON.parse(localStorage[today_date]);
+      function getAPOD() {
+        if (!document.cookie.split("apod=")[1]) {
+          var Http = new XMLHttpRequest();
+          Http.open("GET", api_req, false);
+          Http.send();
 
-      if (!localStorage[today_date]) {
-        var Http = new XMLHttpRequest();
-        Http.open("GET", "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY", false);
-        Http.send();
-        localStorage.setItem(today_date, Http.response);
-        apod = JSON.parse(Http.response);
+          document.cookie = "apod=" + Http.response;
+        }
+        return JSON.parse(document.cookie.split("apod=")[1]);
       }
 
-      image.src = apod.hdurl;
+      var apod = getAPOD();
+      if (!apod.hdurl){ //to account for occasional Youtube videos
+        image.outerHTML = image.outerHTML.replace("img", "iframe");
+      }
+
+      image.src = apod.hdurl || apod.url;
       document.title = apod.title;
       title.innerText = apod.title;
       desc.innerText = apod.explanation;

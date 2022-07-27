@@ -48,6 +48,13 @@ article, address {
   max-width: 80ch;
   white-space: pre-wrap;
 }
+a {
+  color: lightblue;
+  text-decoration: dotted currentColor 1px;
+}
+a:hover {
+  text-decoration: solid currentColor 2px;
+}
 h1 {
   font-weight: 300;
   text-transform: uppercase;

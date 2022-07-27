@@ -53,7 +53,8 @@ article, address {
   white-space: pre-wrap;
 }
 input {
-  background-color: transparent;
+  background-color: black;
+  color: white;
   border: solid 2px lightblue;
   border-radius: 4px;
   padding: 6px;

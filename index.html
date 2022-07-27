@@ -71,11 +71,9 @@
       <article id="desc">
       </article>
       <br><br>
-      <address id="credits">
-        <time id="timestamp"></time>,
-        &copy;&nbsp;
-      </address>
-      <a href="https://apod.nasa.gov/apod/astropix.html">View original on APOD</a>
+      <input id="timestamp" type="date" min="1995-06-16">
+      <address id="credits"></address>
+      <a id="view_original" href="https://apod.nasa.gov/apod/astropix.html">View original on APOD</a>
     </main>
 
     <script type="text/javascript">
@@ -84,13 +82,19 @@
       var api_req = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
       // DEMO KEY XD
 
-      function getAPOD() {
+      function getAPOD(date = today_date) {
         if (!document.cookie.split("apod=")[1]) {
           var Http = new XMLHttpRequest();
           Http.open("GET", api_req, false);
           Http.send();
 
           document.cookie = "apod=" + Http.response;
+        }
+        if (date != today_date) {
+          Http = new XMLHttpRequest();
+          Http.open("GET", api_req + "&date=" + date, false);
+          Http.send();
+          return JSON.parse(Http.response);
         }
         return JSON.parse(document.cookie.split("apod=")[1]);
       }
@@ -103,14 +107,29 @@
           window.location.href = image.src;
         }
       }
+      function getAPODFormattedDate(date) {
+        return new Date(date).toISOString().split("T")[0].replaceAll("-", "").slice(2);
+      }
 
-      image.src = apod.hdurl || apod.url;
-      image.alt = apod.title;
-      document.title = apod.title;
-      title.innerText = apod.title;
-      desc.innerText = apod.explanation;
-      timestamp.innerText = apod.date;
-      credits.innerText += apod.copyright;
+      function displayAPOD(apod) {
+        image.src = apod.hdurl || apod.url;
+        image.alt = apod.title;
+        document.title = apod.title;
+        title.innerText = apod.title;
+        desc.innerText = apod.explanation;
+        timestamp.value = apod.date;
+        timestamp.max = today_date;
+        credits.innerText = "© " + apod.copyright;
+        if(!apod.copyright) {
+          credits.innerText ="";
+        }
+        view_original.href = "https://apod.nasa.gov/apod/ap" + getAPODFormattedDate(apod.date)  + ".html"
+      }
+
+      displayAPOD(apod);
+      timestamp.oninput = function(){
+        displayAPOD(getAPOD(timestamp.value));
+      };
     </script>
   </body>
 </html>

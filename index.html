@@ -7,79 +7,8 @@
     <meta name="color-scheme" content="dark">
     <meta title="APOD Viewer">
     <meta name="description" content="Aesthetically pleasing Astronomy Picture viewer">
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
-
-      @keyframes show-content {
-        from {
-          opacity: 0;
-          transform: scale(.95);
-        } to {
-          opacity: 1;
-          transform: unset;
-        }
-      }
-
-      html, body {
-        margin: 0;
-        padding: 0;
-        background-color: black;
-        color: white;
-      }
-      body {
-        display: flex;
-        flex-direction: row;
-        font-family: "Roboto";
-      }
-      body * {
-        animation: show-content 800ms ease-out forwards;
-      }
-      @media (prefers-reduced-motion) {
-        body * {
-          animation-duration: 0s;
-        }
-      }
-
-      img, iframe {
-        display: block;
-        border: none;
-        object-fit: cover;
-        max-width: 100vw;
-      }
-      img:hover {
-        object-fit: contain;
-      }
-      main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 16px;
-      }
-      article, address {
-        max-width: 80ch;
-      }
-      h1 {
-        font-weight: 300;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-
-      @media only screen and (max-width: 780px) {
-        body {
-          flex-direction: column;
-        }
-      }
-      @media only screen and (min-width: 781px) {
-        img, iframe {
-          max-width: 65%;
-          height: 100vh;
-        }
-        main {
-          width: 100%;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap">
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="https://apod.nasa.gov/apod/calendar/today.jpg">
   </head>
   <body>
@@ -94,60 +23,6 @@
       <a id="view_original" href="https://apod.nasa.gov/apod/astropix.html">View original on APOD</a>
     </main>
 
-    <script type="text/javascript">
-      var today = new Date();
-      var today_date = today.toISOString().split("T")[0];
-      var api_req = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
-      // DEMO KEY XD
-
-      function getAPOD(date = today_date) {
-        if (!document.cookie.split("apod=")[1]) {
-          var Http = new XMLHttpRequest();
-          Http.open("GET", api_req, false);
-          Http.send();
-
-          document.cookie = "apod=" + Http.response;
-        }
-        if (date != today_date) {
-          Http = new XMLHttpRequest();
-          Http.open("GET", api_req + "&date=" + date, false);
-          Http.send();
-          return JSON.parse(Http.response);
-        }
-        return JSON.parse(document.cookie.split("apod=")[1]);
-      }
-
-      var apod = getAPOD();
-      if (!apod.hdurl){ //to account for occasional Youtube videos
-        image.outerHTML = image.outerHTML.replace("img", "iframe");
-      } else {
-        image.onclick = function(){
-          window.location.href = image.src;
-        }
-      }
-      function getAPODFormattedDate(date) {
-        return new Date(date).toISOString().split("T")[0].replaceAll("-", "").slice(2);
-      }
-
-      function displayAPOD(apod) {
-        image.src = apod.hdurl || apod.url;
-        image.alt = apod.title;
-        document.title = apod.title;
-        title.innerText = apod.title;
-        desc.innerText = apod.explanation;
-        timestamp.value = apod.date;
-        timestamp.max = today_date;
-        credits.innerText = "© " + apod.copyright;
-        if(!apod.copyright) {
-          credits.innerText ="";
-        }
-        view_original.href = "https://apod.nasa.gov/apod/ap" + getAPODFormattedDate(apod.date)  + ".html"
-      }
-
-      displayAPOD(apod);
-      timestamp.oninput = function(){
-        displayAPOD(getAPOD(timestamp.value));
-      };
-    </script>
+    <script type="text/javascript" src="script.js"></script>
   </body>
 </html>

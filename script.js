@@ -3,7 +3,7 @@ var today_date = today.toISOString().split("T")[0];
 var api_req = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
 // DEMO KEY XD
 
-function getAPOD(date = today_date) {
+function getAPOD(date) {
   if (!document.cookie.split("apod=")[1]) {
     var Http = new XMLHttpRequest();
     Http.open("GET", api_req, false);
@@ -20,7 +20,7 @@ function getAPOD(date = today_date) {
   return JSON.parse(document.cookie.split("apod=")[1]);
 }
 
-var apod = getAPOD();
+var apod = getAPOD(today_date);
 function getAPODFormattedDate(date) {
   return new Date(date).toISOString().split("T")[0].replaceAll("-", "").slice(2);
 }
@@ -48,7 +48,7 @@ function displayAPOD(apod) {
       credits.innerText ="";
     }
     view_original.href = "https://apod.nasa.gov/apod/ap" + getAPODFormattedDate(apod.date)  + ".html";
-  } catch {
+  } catch (Error) {
     image.outerHTML = image.outerHTML.replace("iframe", "img");
     image.src = "error.jpg";
     image.alt = "Error";

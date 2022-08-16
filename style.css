@@ -47,32 +47,51 @@ main {
   align-items: center;
   justify-content: center;
   padding: 16px;
+  gap: 4px;
 }
 article, address {
   max-width: 80ch;
   white-space: pre-wrap;
 }
+
 input {
-  background-color: black;
-  color: white;
-  border: solid 2px lightblue;
-  border-radius: 4px;
-  padding: 6px;
-  font-size: medium;
-  font-family: "Roboto";
+  padding: 7px 14px;
+  background: radial-gradient(100% 100% at 100% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%), linear-gradient(180deg, #444444 0%, #222222 100%);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  color: whitesmoke;
+  border: none !important;
+  outline: none !important;
+  cursor: pointer;
 }
-input:hover, input:active{
-  box-shadow: 0px 0px 6px lightblue;
-  background-color: lightblue;
-  color: black;
+input:hover {
+  background: linear-gradient(0deg, rgba(204, 204, 204, 0.15), rgba(204, 204, 204, 0.15)), radial-gradient(100% 100% at 100% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%), linear-gradient(180deg, #444444 0%, #222222 100%);
 }
+input:active, input:focus {
+  background: radial-gradient(100% 100% at 100% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%), linear-gradient(180deg, #444444 0%, #222222 100%);
+}
+input:invalid {
+  outline: solid darkred 2px !important;
+}
+input:valid {
+  animation: becomes-valid 250ms ease-out;
+}
+@keyframes becomes-valid {
+  0% {
+    outline: solid darkred 2px !important;
+  } 50% {
+    outline: solid green 2px !important;
+  } 100% {
+    outline: unset;
+  }
+}
+
 a {
   color: lightblue;
   text-decoration: none;
 }
 a:hover {
   text-shadow: 0px 0px 6px currentColor;
-  text-decoration: underline solid 2px currentColor;
 }
 h1 {
   font-weight: 300;

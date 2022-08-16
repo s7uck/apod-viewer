@@ -26,33 +26,27 @@ function getAPODFormattedDate(date) {
 }
 
 function displayAPOD(apod) {
-  try {
-    image.src = apod.hdurl || apod.url;
-    image.alt = apod.title;
-    document.title = apod.title;
-    title.innerText = apod.title;
-    if (apod.media_type != "image"){ //to account for occasional Youtube videos
-      image.outerHTML = image.outerHTML.replace("img", "iframe");
-    } else {
-      image.outerHTML = image.outerHTML.replace("iframe", "img");
-      image.onclick = function(){
-        window.location.href = image.src;
-      }
-    }
-    desc.innerText = apod.explanation;
-    timestamp.value = apod.date;
-    timestamp.max = today_date;
-    if(apod.copyright) {
-      credits.innerText = "© " + apod.copyright;
-    } else {
-      credits.innerText ="";
-    }
-    view_original.href = "https://apod.nasa.gov/apod/ap" + getAPODFormattedDate(apod.date)  + ".html";
-  } catch (Error) {
+  image.src = apod.hdurl || apod.url;
+  image.alt = apod.title;
+  document.title = apod.title;
+  title.innerText = apod.title;
+  if (apod.media_type != "image"){ //to account for occasional Youtube videos
+    image.outerHTML = image.outerHTML.replace("img", "iframe");
+  } else {
     image.outerHTML = image.outerHTML.replace("iframe", "img");
-    image.src = "error.jpg";
-    image.alt = "Error";
+    image.onclick = function(){
+      window.location.href = image.src;
+    }
   }
+  desc.innerText = apod.explanation;
+  timestamp.value = apod.date;
+  timestamp.max = today_date;
+  if(apod.copyright) {
+    credits.innerText = "© " + apod.copyright;
+  } else {
+    credits.innerText ="";
+  }
+  credits.href = "https://apod.nasa.gov/apod/ap" + getAPODFormattedDate(apod.date)  + ".html";
 }
 
 displayAPOD(apod);

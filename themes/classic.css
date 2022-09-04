@@ -1,0 +1,113 @@
+body {
+  font-family: 'Segoe UI', system-ui;
+  background-color: #222222;
+  color: #888888;
+}
+@media (prefers-color-scheme: light) {
+  body {
+    background: url('https://git-scm.com/images/bg/body.jpg');
+  }
+}
+h1:before {
+  display: inline-block;
+  content: "\E7";
+  font-family: 'Wingdings';
+  font-size: .6em;
+  padding: 6px;
+  box-shadow: 0px 2px 5px black;
+  background: radial-gradient(
+            circle at 50% 100%,
+            #0bfdfa,
+            transparent 60%
+          ),
+          linear-gradient(#86a7bc 50%, #092747 50%);
+  color: white;
+  border-radius: 100%;
+  margin-right: 16px;
+}
+h1:hover:before {
+  filter: brightness(130%);
+}
+h1:active:before {
+  padding-left: 8px;
+  padding-top: 8px;
+  filter: brightness(70%);
+}
+h1 {
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+}
+main {
+  align-items: unset;
+}
+main input {
+  margin-top: auto;
+}
+* {
+  transition: none !important;
+}
+input {
+  min-height: 12px;
+  border: 1px solid #f3f3f3;
+  box-shadow: 0 0 0 1px #707070;
+  border-radius: 3px;
+  background: -moz-linear-gradient(top, #F2F2F2 0%, #EBEBEB 50%, #DDDDDD 51%, #CFCFCF 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#F2F2F2), color-stop(0.5,#EBEBEB),color-stop(0.51,#DDDDDD),color-stop(1,#CFCFCF));
+  background: linear-gradient(top, #F2F2F2 0%, #EBEBEB 50%, #DDDDDD 51%, #CFCFCF 100%);
+  color: black;
+  cursor: auto;
+}
+input:hover {
+  border: 1px solid #ECF7FD;
+  box-shadow: 0 0 0 1px #3C7FB1;
+  background: -moz-linear-gradient(top, #EAF6FD 0%, #D9F0FC 50%, #BEE6FD 51%, #A7D9F5 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#EAF6FD), color-stop(0.5,#D9F0FC),color-stop(0.51,#BEE6FD),color-stop(1,#A7D9F5));
+  background: linear-gradient(top, #EAF6FD 0%, #D9F0FC 50%, #BEE6FD 51%, #A7D9F5 100%);
+}
+input:active, input:focus {
+  border: 1px solid #73A7C4;
+  border-bottom: 0;
+  box-shadow: 0 0 0 1px #2C628B;
+  background: -moz-linear-gradient(top, #E5F4FC 0%, #C4E5F6 50%, #98D1EF 51%, #68B3DB 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#E5F4FC), color-stop(0.5,#C4E5F6),color-stop(0.51,#98D1EF),color-stop(1,#68B3DB));
+}
+
+@media (prefers-color-scheme: dark) {
+  h1, main {
+    text-transform: lowercase;
+  }
+  h1:before {
+    font-family: .7em;
+    padding: 2px;
+    border: 2px #888888 solid;
+    border-spacing: 2px;
+    color: unset;
+    background: none !important;
+    box-shadow: none;
+  }
+  h1:hover:before, h1:active:before {
+    filter: none !important;
+  }
+  h1:active:before {
+    padding: 2px;
+    background-color: #888888 !important;
+    color: #222222 !important;
+  }
+  input {
+    box-shadow: none;
+    border-radius: 0;
+    background: transparent;
+    border: 2px whitesmoke solid !important;
+    color: whitesmoke;
+  }
+  input:hover {
+    border: initial;
+    box-shadow: none;
+    background: #1e1e1e;
+  }
+  input:active, input:focus {
+    background: whitesmoke;
+    color: #1e1e1e;
+  }
+}

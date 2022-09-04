@@ -3,7 +3,7 @@ function APOD(apod) {
 '  <main>\n'+
 '    <h1>'+apod.title+'</h1>\n'+
 '    <article>\n'+
-'      '+apod.explanation.split('    ')[0]+'\n'+
+'      '+apod.explanation+'\n'+
 '    </article>\n'+
 '    <br><br>\n'+
 '    <input id="timestamp" type="date" min="1995-06-16" max="'+new Date().toISOString().split('T')[0]+' value="'+apod.date+'">\n'+

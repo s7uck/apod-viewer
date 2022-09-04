@@ -1,0 +1,28 @@
+@import url('light.css');
+html,body {
+  background-color: #eeeeee;
+  background: url('https://git-scm.com/images/bg/body.jpg');
+  color: #2e2e2e;
+}
+main {
+  align-items: flex-start;
+  text-shadow: 0px -4px 8px lightblue;
+}
+@media only screen and (min-width: 850px) {
+  main {
+    position: absolute;
+    max-width: 60ch;
+    max-height: 80vh;
+    background: url('https://git-scm.com/images/bg/body.jpg');
+    border-radius: 28px 0 0 28px;
+    box-shadow: 0px 0px 4px #acacac;
+    top: 20px;
+    right: 0;
+  }
+}
+h1 {
+  font-weight: 500;
+  text-shadow: 0px 0px 4px #acacac;
+  letter-spacing: -1px;
+  text-transform: none;
+}

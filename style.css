@@ -53,8 +53,8 @@ main {
 }
 article, address {
   max-width: 80ch;
-  white-space: pre-wrap;
   font-weight: 300;
+  text-align: justify;
 }
 
 input {

@@ -8,7 +8,7 @@ APOD    = ({ copyright, date, explanation, hdurl, title, url }) =>
 <main>
   <h1>${title}</h1>
   <article>
-    ${explanation}
+    ${explanation.split('    ')[0]}
   </article>
   <br><br>
   <input id="timestamp" type="date" min="1995-06-16">

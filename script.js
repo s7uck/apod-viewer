@@ -10,7 +10,6 @@ function APOD(apod) {
 '    <input id="search" type="search" placeholder="Search" list="searchlist">\n'+
 '    <a href="https://apod.nasa.gov/apod/astropix.html"><address id="credits">'+(apod.copyright ? ('© ' + apod.copyright) : ('⨀ ' + 'Public domain'))+'</address></a>\n'+
 '  </main>\n'
-console.log(html)
   if(apod.media_type != 'image')  {
     html.replace('img', 'iframe')
   }

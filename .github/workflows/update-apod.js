@@ -23,16 +23,11 @@ function main(apod) {
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" title="${apod.title || 'Astronomy Picture of the Day'}">
     <title>${apod.title || 'Astronomy Picture of the Day'}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="dark">
     <meta title="${apod.title || 'APOD Viewer'}">
     <meta name="description" content="${apod.explanation || 'Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.'}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400&display=swap">
-    <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="script.js" defer></script>
-    <link rel="icon" href="https://apod.nasa.gov/apod/calendar/today.jpg">
+    <meta name="author" content="${apod.copyright || 'Public domain'}">
 
     <meta property="og:title" content="${apod.title || 'APOD Viewer'}">
     <meta property="og:type" content="article">
@@ -43,6 +38,13 @@ function main(apod) {
     <meta property="og:image:secure_url" content="${apod.url}">
     <meta property="og:image:type" content="image/jpeg">
     <meta http-equiv="SameSite" content="Strict">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="script.js" defer></script>
+    <link rel="icon" href="https://apod.nasa.gov/apod/calendar/today.jpg">
   </head>
   <body>
     ${

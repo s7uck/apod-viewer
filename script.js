@@ -6,8 +6,7 @@ function APOD(apod) {
 '      '+apod.explanation+'\n'+
 '    </article>\n'+
 '    <br><br>\n'+
-'    <input id="timestamp" type="date" min="1995-06-16" max="'+new Date().toISOString().split('T')[0]+' value="'+apod.date+'">\n'+
-'    <input id="search" type="search" placeholder="Search" list="searchlist">\n'+
+'    <input id="timestamp" type="date" min="1995-06-16" max="'+new Date().toISOString().split('T')[0]+'" value="'+apod.date+'">\n'+
 '    <a href="https://apod.nasa.gov/apod/astropix.html"><address id="credits">'+(apod.copyright ? ('© ' + apod.copyright) : ('⨀ ' + 'Public domain'))+'</address></a>\n'+
 '  </main>\n'
   if(apod.media_type != 'image')  {
@@ -51,4 +50,10 @@ timestamp.onchange = function() {
       send()
     }
   }
+}
+function setTheme(name) {
+  ln = document.createElement('link')
+  ln.rel = 'stylesheet'
+  ln.href = 'themes/'+name+'.css'
+  document.head.appendChild(ln)
 }

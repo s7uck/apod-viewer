@@ -43,7 +43,7 @@ function displayAPOD(apod) {
 }
 
 timestamp.onchange = function() {
-  if (timestamp.value >= timestamp.min && (timestamp.value <= timestamp.max || true)) {
+  if (timestamp.value >= timestamp.min && timestamp.value <= timestamp.max) {
     with (new XMLHttpRequest()) {
       open("GET", 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date='+timestamp.value)
       onload = function() { displayAPOD(JSON.parse(this.responseText)) }

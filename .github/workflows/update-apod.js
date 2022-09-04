@@ -13,7 +13,7 @@ APOD    = ({ copyright, date, explanation, hdurl, title, url }) =>
   <br><br>
   <input id="timestamp" type="date" min="1995-06-16">
   <input id="search" type="search" placeholder="Search" list="searchlist">
-  <a href="https://apod.nasa.gov/apod/astropix.html"><address id="credits">${copyright}</address></a>
+  <a href="https://apod.nasa.gov/apod/astropix.html"><address id="credits">${copyright ? ('© ' + copyright) : ('⨀ ' + 'Public domain')}</address></a>
 </main>
 `
 

@@ -9,21 +9,15 @@ jobs:
   update-apod:
     runs-on: ubuntu-latest
     steps:
-      - name: Get latest APOD
-        id: apod
-        uses: fjogeleit/http-request-action@v1.11.0
-        with:
-          url: 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY'
-          method: 'GET'
-
-      - name: Update index.html
-        uses: actions/checkout@v3
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node_version: '14'
-        run: npm install jsdom
-        run: node update-apod.js ${{ steps.apod.outputs.response }}
-        uses: test-room-7/action-update-file@v1.6.0
+
+      - run: npm install jsdom
+      - run: wget 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY' -O apod.json
+      - run: node .github/workflows/update-apod.js apod.json
+      - uses: test-room-7/action-update-file@v1.6.0
         with:
           file-path: index.html
           commit-msg: Update index.html

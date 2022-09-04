@@ -40,7 +40,7 @@ function main(apod) {
     <meta property="og:locale" content="en">
     <meta property="og:description" content="${apod.explanation || 'Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.'}">
     <meta property="og:image" content="${apod.url}">
-    <meta property="og:image:secure_url" content="${apod.hdurl}">
+    <meta property="og:image:secure_url" content="${apod.url}">
     <meta property="og:image:type" content="image/jpeg">
     <meta http-equiv="SameSite" content="Strict">
   </head>
@@ -55,4 +55,5 @@ function main(apod) {
 
 `)
 }
-main(JSON.parse(process.argv[2]))
+main(JSON.parse(
+    fs.readFileSync(process.argv[2], { encoding: 'utf-8', flag: 'r' })))

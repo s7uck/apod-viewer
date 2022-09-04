@@ -12,7 +12,6 @@ APOD    = ({ copyright, date, explanation, hdurl, title, url }) =>
   </article>
   <br><br>
   <input id="timestamp" type="date" min="1995-06-16" max="${new Date().toISOString().split('T')[0]}" value="${date}">
-  <input id="search" type="search" placeholder="Search" list="searchlist">
   <a href="https://apod.nasa.gov/apod/astropix.html"><address id="credits">${copyright ? ('© ' + copyright) : ('⨀ ' + 'Public domain')}</address></a>
 </main>
 `
